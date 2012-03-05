@@ -1,0 +1,13 @@
+#parallax{
+    position:relative;
+    width:500px;
+    height:500px;
+    margin:5% auto;
+    overflow:hidden;
+    border:1px solid;
+}
+#parallax img{
+    position:relative;
+    margin:0 auto;
+    display:block;
+}​
