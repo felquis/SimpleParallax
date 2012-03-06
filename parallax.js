@@ -6,45 +6,75 @@
 * @felquis, @cironunesdev
 * DEMO: http://jsfiddle.net/6qhVN/
 */
+/*
+*
+* Simple Parallax, 01/03/2012
+*
+* Contributors
+* @felquis, @cironunesdev
+* DEMO: http://jsfiddle.net/6qhVN/2/
+*
+*/
 
-!(function( $, window, document ) {
-    var $doc = $(document),
-            body = document.body,
-            val = 0.2,
-            limit = 1;
+!(function( $, window, document, undefined ) {
+  var //first plugin configurations
+  pluginName = 'simpleParallax',
+  defaults = {
+    limit: 1
+  },
 
-    $(function(){
+  //then dom aux elems
+  $doc = $(document),
+  body = document.body,
 
-      $doc.on('mousemove', function( e ){
+  //then calculation aux
+  inc = 0.2,
+  bodyX = body.clientWidth / 2,
+  bodyY = body.clientHeight / 2;
 
-            var //first proprities to calculate the parallax
-            xMouse = e.pageX,
-            yMouse = e.pageY,
-            xCenter = body.clientWidth / 2,
-            yCenter = body.clientHeight / 2,
-            offsetLeft = xMouse - xCenter,
-            offsetTop = yMouse - yCenter,
-            i,
+  function Plugin( elem, options ) {
+    this.elem = elem;
+    this.$elem = $(this.elem);
+    this.options = $.extend( {}, defaults, options );
+ 
+    this._defaults = defaults;
+    this._name = pluginName;
 
-            //then caching dom elem and your lenght
-            $elem = $('.parallax-item');
+    this.init();
+  }
 
-            $elem.each(function( i ) {
-                $(this).css({
-                    left: offsetLeft * val,
-                    top: offsetTop * val
-                });
+  Plugin.prototype.handleMouseParallax = function( e ) {
+    var mouseX = e.pageX,
+      mouseY = e.pageY,
 
-                console.log(val);
+      offsetLeft = mouseX - bodyX,
+      offsetTop = mouseY - bodyY,
 
-                val += 0.2;
+      that = e.data.inst;
 
-                if( val === limit ) {
-                    val = 0.2;
-                }
-            });
-
+      that.$elem.each(function() {
+        $(this).css({
+          left: offsetLeft * inc,
+          top: offsetTop * inc
         });
 
+        inc += 0.2;
+
+        if( inc === that._defaults.limit ) {
+          inc = 0.2;
+        }
+      });
+  };
+
+  Plugin.prototype.init = function() {
+    $doc.on('mousemove', { inst: this } ,this.handleMouseParallax);
+  };
+
+  $.fn[pluginName] = function( options ) {
+    return this.each(function() {
+      if( !$.data(this, 'plugin_' + pluginName) ) {
+        $.data(this, 'plugin_' + pluginName, new Plugin( this, options ));
+      }
     });
-}( jQuery, window, document ))
+  };
+}( jQuery, window, document ));
