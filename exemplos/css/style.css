@@ -1,4 +1,4 @@
-#parallax{
+.parallax{
     position:relative;
     width:500px;
     height:500px;
@@ -6,7 +6,7 @@
     overflow:hidden;
     border:1px solid;
 }
-#parallax img{
+.parallax img{
     position:relative;
     margin:0 auto;
     display:block;

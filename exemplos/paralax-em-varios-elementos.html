@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Parallax Effect</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <div class="parallax">
+        <img class="parallax-item" src="//lorempixum.com/150/150" />
+        <img class="parallax-item" src="//lorempixum.com/150/150" />
+        <img class="parallax-item" src="//lorempixum.com/150/150" />
+        <img class="parallax-item" src="//lorempixum.com/150/150" />
+    </div>​
+
+    <script>
+    /*
+        Carrega o jQuery verficando se tem alguma versão do
+        jQuery sendo passada como parâmetro na URL
+    */
+    var JqURLVersion = (location.search.match(/[?&]jquery=(.*?)(?=&|$)/) || [])[1];
+
+    document.write('<script src="\/\/code.jquery.com\/jquery' + ((JqURLVersion)? '-'+JqURLVersion: '')
+     + '.min.js"><\/script>');
+    </script>
+    <script src="../build/parallax.js"></script>
+
+    <script>
+        /*
+            Exemplo
+        */
+
+        $('.parallax-item').simpleParallax();
+    </script>
+</body>
+</html>
