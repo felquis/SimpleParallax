@@ -1,20 +1,9 @@
 /*
-*
-* Simple Parallax, 01/03/2012
-*
-* Contributors
-* @felquis, @cironunesdev
-* DEMO: http://jsfiddle.net/6qhVN/
-*/
-/*
-*
-* Simple Parallax, 01/03/2012
-*
-* Contributors
-* @felquis, @cironunesdev
-* DEMO: http://jsfiddle.net/6qhVN/2/
-*
-*/
+ * jQuery Plugin Simple Parallax, 01/03/2012
+ * Author: https://github.com/felquis
+ * Git Repo: https://github.com/felquis/SimpleParallax
+ * Contributors: https://github.com/felquis/SimpleParallax/contributors
+ */
 
 !(function( $, window, document, undefined ) {
   var //first plugin configurations
