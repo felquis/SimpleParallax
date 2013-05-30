@@ -1,3 +1,4 @@
+
 /*
  * jQuery Plugin Simple Parallax, 01/03/2012
  * Author: https://github.com/felquis
@@ -5,65 +6,72 @@
  * Contributors: https://github.com/felquis/SimpleParallax/contributors
  */
 
-!(function( $, window, document, undefined ) {
-  var //first plugin configurations
-  pluginName = 'simpleParallax',
-  defaults = {
-    limit: 1
-  },
+/*jslint browser: true, nomen: true */
+/*globals jQuery, document, window */
 
-  //then dom aux elems
-  $doc = $(document),
-  body = document.body,
+(function ($, window, document, undefined) {
+    'use strict';
 
-  //then calculation aux
-  inc = 0.2,
-  bodyX = body.clientWidth / 2,
-  bodyY = body.clientHeight / 2;
+    //first plugin configurations
+    var pluginName = 'simpleParallax',
+        defaults = {
+            limit: 1
+        },
 
-  function Plugin( elem, options ) {
-    this.elem = elem;
-    this.$elem = $(this.elem);
-    this.options = $.extend( {}, defaults, options );
- 
-    this._defaults = defaults;
-    this._name = pluginName;
+        //then dom aux elems
+        $doc = $(document),
+        body = document.body,
 
-    this.init();
-  }
+        //then calculation aux
+        inc = 0.2,
+        bodyX = body.clientWidth / 2,
+        bodyY = body.clientHeight / 2;
 
-  Plugin.prototype.handleMouseParallax = function( e ) {
-    var mouseX = e.pageX,
-      mouseY = e.pageY,
+    function Plugin(elem, options) {
+        this.elem = elem;
+        this.$elem = $(this.elem);
+        this.options = $.extend({}, defaults, options);
 
-      offsetLeft = mouseX - bodyX,
-      offsetTop = mouseY - bodyY,
+        this._defaults = defaults;
+        this._name = pluginName;
 
-      that = e.data.inst;
+        this.init();
+    }
 
-      that.$elem.each(function() {
-        $(this).css({
-          left: offsetLeft * inc,
-          top: offsetTop * inc
+    Plugin.prototype.handleMouseParallax = function (e) {
+        var mouseX = e.pageX,
+            mouseY = e.pageY,
+
+            offsetLeft = mouseX - bodyX,
+            offsetTop = mouseY - bodyY,
+
+            that = e.data.inst;
+
+        that.$elem.each(function () {
+            $(this).css({
+                left: offsetLeft * inc,
+                top: offsetTop * inc
+            });
+
+            inc += 0.2;
+
+            if (inc === that._defaults.limit) {
+                inc = 0.2;
+            }
         });
+    };
 
-        inc += 0.2;
+    Plugin.prototype.init = function () {
+        $doc.on('mousemove', {
+            inst: this
+        }, this.handleMouseParallax);
+    };
 
-        if( inc === that._defaults.limit ) {
-          inc = 0.2;
-        }
-      });
-  };
-
-  Plugin.prototype.init = function() {
-    $doc.on('mousemove', { inst: this } ,this.handleMouseParallax);
-  };
-
-  $.fn[pluginName] = function( options ) {
-    return this.each(function() {
-      if( !$.data(this, 'plugin_' + pluginName) ) {
-        $.data(this, 'plugin_' + pluginName, new Plugin( this, options ));
-      }
-    });
-  };
-}( jQuery, window, document ));
+    $.fn[pluginName] = function (options) {
+        return this.each(function () {
+            if (!$.data(this, 'plugin_' + pluginName)) {
+                $.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+            }
+        });
+    };
+}(jQuery, window, document));
