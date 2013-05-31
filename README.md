@@ -7,10 +7,7 @@
 Este é um plugin jQuery para fazer um parallax baseado na posição e movimento do mouse do computador.
 
 ## Exemplo de uso
-```js
-$('.elementos').simpleParallax();
-```
-Onde `.elementos` é um seletor de cada elemento que será animado pelo parallax.
+[Veja a página de exemplos](http://felquis.github.io/SimpleParallax/)
 
 ## Mapa do projeto
 
